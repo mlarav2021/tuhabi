@@ -1,0 +1,1 @@
+copy employees (first_name,last_name,company_name,address,city,state,zip,phone1,phone2,email,department) from '/var/lib/postgresql/data/pgdata/employees.csv' with (format csv,header);

@@ -1,0 +1,39 @@
+
+version: '3.1'
+
+services:
+  python:
+    build: .
+    environment:
+      FLASK_ENV: development
+    ports:
+      - "5000:5000"
+    links:
+      - 'db'
+
+  db:
+    image: postgres:latest
+    restart: always
+    container_name: mlv_container_postgres
+    hostname: mlv_host
+    environment:
+      POSTGRES_DB: mlv
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      PGDATA: /tmp
+    volumes:
+      - ./sql/create_schema.sql:/docker-entrypoint-initdb.d/create_schema.sql
+      - ./employees.csv:/var/lib/postgresql/data/pgdata/employees.csv
+      - ./sql/data.sql:/docker-entrypoint-initdb.d/data.sql
+      
+    ports:
+      - "5432:5432"
+
+
+
+
+
+
+
+
+
